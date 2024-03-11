@@ -15,4 +15,16 @@ Rails.application.routes.draw do
   post "lists", to: "lists#create"
    # A user can see the details of a given list and its name
    get "lists/:id", to: "lists#show", as: :list
+
+
+  #  A user can add a new bookmark (movie/list pair) to an existing list
+  #  Checkout simple_form docs about f.association to easily create a select dropdown for our list of movies.
+
+  get "lists/:list_id/bookmarks", to: "bookmarks#index", as: :bookmarks
+  # resources :bookmarks, only: [:index, :new, :create, :destroy]
+  get "lists/:list_id/bookmarks/new", to: "bookmarks#new", as: :new_bookmark
+  post "lists/:list_id/bookmarks", to: "bookmarks#create"
+
+  #  A user can delete a bookmark from a list. How can we make a delete link again?
+  delete "bookmarks/:id", to: "bookmarks#destroy"
 end
